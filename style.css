@@ -9,21 +9,7 @@
   font-display: swap;
 }
 
-@media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-    padding: 10px;
-  }
-  .hero-text {
-    font-size: 1.2rem;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-  .container {
-    padding: 20px;
-  }
-}
+/* Enhanced responsive design for better mobile experience */
 
 .wrapper {
   display: flex;
@@ -41,6 +27,26 @@
 body{
   background-color: #202124;
   color: rgb(239, 210, 157);
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+  -webkit-text-size-adjust: 100%; /* Prevent text scaling on iOS */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
+
+/* Simple mouse hover effects */
+a, button, .btn-box a, .home-sci a, .navbar a, .logo {
+  transition: all 0.3s ease;
+}
+
+a:hover, button:hover, .btn-box a:hover, .home-sci a:hover, .navbar a:hover, .logo:hover {
+  transform: translateY(-2px);
+}
+
+.btn-box a:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+.home-sci a:hover {
+  transform: translateY(-3px) scale(1.1);
 }
 
 .header{
@@ -56,6 +62,20 @@ body{
   z-index: 100;
 }
 
+/* Header responsive improvements */
+@media (max-width: 768px) {
+  .header {
+    padding: 20px 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 15px 3%;
+    flex-wrap: wrap;
+  }
+}
+
 .logo{
   position: relative;
   font-size: 40px;
@@ -63,19 +83,25 @@ body{
   text-decoration: none;
   font-weight: 600;
   margin-left: -50px;
+  animation: slideInLeft 0.8s ease-out;
 }
 
-.logo::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  animation: showRight 1s ease forwards;
-  animation-delay: .4s;
+/* Logo responsive improvements */
+@media (max-width: 768px) {
+  .logo {
+    font-size: 32px;
+    margin-left: -30px;
+  }
 }
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 28px;
+    margin-left: 0;
+  }
+}
+
+/* Logo slide effect removed */
 
 .logo:hover{
   color:rgb(202, 17, 110) ;
@@ -89,20 +115,89 @@ body{
   font-weight: 600;
   margin-left: 40px;
   transition: .3s;
+  animation: slideInRight 0.8s ease-out 0.2s both;
 }
 
-.navbar a::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0px;
-  right: 0;
-  width: 100%;
-  height: 150%;
-  animation: showRight 1.5s ease forwards;
-  animation-delay: .2s;
-  z-index: 2;
+/* Navigation responsive improvements */
+@media (max-width: 1024px) {
+  .navbar a {
+    font-size: 20px;
+    margin-left: 25px;
+  }
 }
+
+@media (max-width: 768px) {
+  .navbar a {
+    font-size: 18px;
+    margin-left: 15px;
+  }
+}
+
+/* Mobile menu toggle */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: wheat;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .navbar {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background-color: #202124;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 50px;
+    transition: left 0.3s ease;
+    z-index: 99;
+  }
+  
+  .navbar.active {
+    left: 0;
+  }
+  
+  .navbar a {
+    margin: 20px 0;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 15px 3%;
+    flex-wrap: nowrap;
+  }
+  
+  .logo {
+    font-size: 24px;
+    margin-left: 0;
+  }
+  
+  .navbar {
+    top: 60px;
+    height: calc(100vh - 60px);
+  }
+}
+
+/* Navbar slide effect removed */
 
 .navbar a:hover,
 .navbar a.active no-repeat{
@@ -111,12 +206,51 @@ body{
 
 .home{
   height: 100vh;
-  background: url('img/AUUU.png') no-repeat;
+  background: url('img/red-abstract-lines-6hwu6t8epsgm0tjy.jpg') no-repeat;
   background-size: cover;
   background-position: center;
+  background-attachment: scroll; /* Better performance on mobile */
   display: flex;
   align-items: center;
   padding: 0 10%;
+  min-height: 100vh; /* Ensure full height on mobile */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background overlay for better text readability */
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(32, 33, 36, 0.3);
+  z-index: 1;
+}
+
+/* Ensure content is above overlay */
+.home-content,
+.home-sci {
+  position: relative;
+  z-index: 2;
+}
+
+/* Simple cursor effects removed for professional look */
+
+/* Home section responsive improvements */
+@media (max-width: 1024px) {
+  .home {
+    padding: 0 5%;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding: 0 3%;
+    min-height: 100vh;
+  }
 }
 
 .home-content h1{
@@ -124,57 +258,30 @@ body{
   font-size: 60px;
   font-weight: 600;
   line-height: 2;
+  animation: fadeInUp 1s ease-out 0.3s both;
 }
 
-.home-content h1::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  animation: showRight 1s ease forwards;
-  animation-delay: .1s;
-}
+/* Home content h1 slide effect removed */
 
 .home-content h3{
   position: relative;
   font-size: 23px;
   font-weight: 620;
   color: azure;
+  animation: fadeInUp 1s ease-out 0.5s both;
 }
 
-.home-content h3::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  animation: showRight 1s ease forwards;
-  animation-delay: .1s;
-}
+/* Home content h3 slide effect removed */
 
 .home-content p{
   position: relative;
   font-size: 20px;
   font-weight: 200;
   margin: 20px 0 40px;
+  animation: fadeInUp 1s ease-out 0.7s both;
 }
 
-.home-content p::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  animation: showRight 1s ease forwards;
-  animation-delay: .3s;
-}
+/* Home content p slide effect removed */
 
 .home-content .btn-box{
   position: relative;
@@ -182,20 +289,10 @@ body{
   width: 250px;
   height: 50px;
   background: transparent;
+  animation: fadeInUp 1s ease-out 0.9s both;
 }
 
-.home-content .btn-box::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0px;
-  right: 0;
-  width: 100%;
-  height: 150%;
-  animation: showRight 1s ease forwards;
-  animation-delay: .4s;
-  z-index: 2;
-}
+/* Home content btn-box slide effect removed */
 
 .btn-box a{
   position: relative;
@@ -204,17 +301,47 @@ body{
   align-items: center;
   width: 200px;
   height: 130%;
-  background-color: transparent;
+  background: linear-gradient(45deg, rgba(113, 6, 113, 0.1), rgba(255, 71, 87, 0.1));
   border: 3px solid rgb(113, 6, 113);
   border-radius: 25px;
   font-size: 55px;
   color: rgb(255, 255, 255);
   text-decoration: none;
-  font-weight: 500 ;
+  font-weight: 500;
   letter-spacing: 1px;
   font-family: OZEL;
   z-index: 1;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 
+    0 0 20px rgba(113, 6, 113, 0.3),
+    0 0 40px rgba(113, 6, 113, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0% {
+    box-shadow: 
+      0 0 20px rgba(113, 6, 113, 0.3),
+      0 0 40px rgba(113, 6, 113, 0.1),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(113, 6, 113, 0.5),
+      0 0 60px rgba(113, 6, 113, 0.2),
+      inset 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px rgba(113, 6, 113, 0.3),
+      0 0 40px rgba(113, 6, 113, 0.1),
+      inset 0 0 20px rgba(255, 255, 255, 0.1);
+  }
 }
 
 .btn-box a::before{
@@ -224,13 +351,56 @@ body{
   left: 0;
   width: 0;
   height: 100%;
-  background-color: #000000;
+  background: linear-gradient(45deg, rgba(113, 6, 113, 0.8), rgba(255, 71, 87, 0.6));
   z-index: -1;
-  transition: .0s;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: 22px;
+}
+
+.btn-box a::after{
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff4757, #ca116e, #ff4757, #ca116e);
+  background-size: 400% 400%;
+  border-radius: 27px;
+  z-index: -2;
+  opacity: 0;
+  animation: gradientShift 3s ease infinite;
+  transition: opacity 0.4s ease;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-box a:hover{
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 10px 30px rgba(113, 6, 113, 0.4),
+    0 20px 60px rgba(113, 6, 113, 0.2),
+    0 0 50px rgba(255, 71, 87, 0.3),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  border-color: #ff4757;
 }
 
 .btn-box a:hover::before{
   width: 100%;
+}
+
+.btn-box a:hover::after{
+  opacity: 1;
+}
+
+.btn-box a:active{
+  transform: translateY(-1px) scale(1.02);
+  transition: all 0.1s ease;
 }
 
 .home-sci{
@@ -240,20 +410,10 @@ body{
   background-color: transparent;
   display: flex;
   justify-content: space-between;
+  animation: fadeIn 1s ease-out 1.1s both;
 }
 
-.home-sci::before{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0px;
-  right: 0;
-  width: 110%;
-  height: 150%;
-  animation: showRight 1s ease forwards;
-  animation-delay: .4s;
-  z-index: 2;
-}
+/* Home-sci slide effect removed */
 
 .home-sci a{
   display: inline-flex;
@@ -269,52 +429,156 @@ body{
   position: relative;
   align-items: center;
   justify-content: center;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  touch-action: manipulation; /* Improve touch responsiveness */
 }
 
-.home-imgHover{
-  position: absolute;
-  top: 0;
-  right: 200px;
-  width: 500px;
-  height: 100%;
-  background: transparent;
-  transition: .45s;
+/* home-imgHover removed as requested */
+
+/* Elegant page loading animations */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.home-imgHover::after{
-  content: '';
-  background: #202124;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  animation: showRight 2s ease forwards;
-  animation-delay: .6s;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.home-imgHover:hover{
-  background: #202124;
-  opacity: .8;
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-@keyframes slide-in {
-  0% { transform: translateX(-100vw); }
-  100% { transform: translateX(0); }
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-@keyframes showRight{
-  100%{ width: 0; }
+/* Enhanced responsive design for all screen sizes */
+
+/* Large tablets and small desktops */
+@media (max-width: 1200px) {
+  .home-content h1 {
+    font-size: 55px;
+  }
+  
 }
 
-/*  EKLENEN RESPONSIVE DÜZENLEMELER */
-@media (max-width: 600px) {
+/* Tablets */
+@media (max-width: 1024px) {
+  .home-content h1 {
+    font-size: 50px;
+  }
 
+  .home-content h3 {
+    font-size: 22px;
+  }
+
+  .home-content p {
+    font-size: 19px;
+  }
+
+  .btn-box a {
+    width: 190px;
+    font-size: 40px;
+  }
+
+}
+
+/* Small tablets */
+@media (max-width: 768px) {
   .home {
     flex-direction: column;
     text-align: center;
-    padding: 20px 5%;
-    height: auto;
+    padding: 80px 5% 20px 5%; /* Add top padding for fixed header */
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  .home-content {
+    order: 1;
+    margin-bottom: 30px;
+  }
+
+  .home-content h1 {
+    font-size: 40px;
+    line-height: 1.3;
+  }
+
+  .home-content h3 {
+    font-size: 20px;
+  }
+
+  .home-content p {
+    font-size: 18px;
+  }
+
+  .btn-box {
+    width: 100%;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .btn-box a {
+    width: 170px;
+    font-size: 32px;
+    height: 50px;
+  }
+
+  .home-sci {
+    order: 2;
+    position: relative;
+    bottom: auto;
+    width: 250px;
+    justify-content: center;
+    gap: 20px;
+    margin: 0 auto;
+  }
+
+  .home-sci a {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+
+}
+
+/* Mobile devices */
+@media (max-width: 600px) {
+  .home {
+    padding: 80px 3% 20px 3%; /* Add top padding for fixed header */
+    min-height: 100vh;
+    justify-content: center;
+  }
+
+  .home-content {
+    order: 1;
+    margin-bottom: 25px;
   }
 
   .home-content h1 {
@@ -333,6 +597,7 @@ body{
   .btn-box {
     width: 100%;
     justify-content: center;
+    margin: 15px 0;
   }
 
   .btn-box a {
@@ -342,46 +607,81 @@ body{
   }
 
   .home-sci {
-    bottom: 10px;
+    order: 2;
     width: 200px;
-    justify-content: center;
     gap: 15px;
+    margin: 0 auto;
   }
 
   .home-sci a {
-    width: 40px; height: 40px; font-size: 20px;
-    margin-bottom: 0;
-  }
-
-  .home-imgHover {
-    position: static;
-    width: 100%;
-    height: 200px;
-    margin-top: 20px;
-  }
-}
-
-@media (min-width: 601px) and (max-width: 1024px) {
-
-  .home-content h1 {
-    font-size: 45px;
-  }
-
-  .home-content h3 {
+    width: 40px;
+    height: 40px;
     font-size: 20px;
   }
 
+}
+
+/* Very small mobile devices */
+@media (max-width: 480px) {
+  .home {
+    padding: 70px 3% 15px 3%; /* Adjust for smaller header */
+  }
+
+  .home-content h1 {
+    font-size: 28px;
+  }
+
+  .home-content h3 {
+    font-size: 16px;
+  }
+
   .home-content p {
-    font-size: 18px;
+    font-size: 14px;
   }
 
   .btn-box a {
-    width: 180px;
-    font-size: 36px;
+    width: 130px;
+    font-size: 24px;
+    height: 40px;
   }
 
-  .home-imgHover {
-    right: 50px;
-    width: 300px;
+  .home-sci {
+    width: 180px;
+    gap: 12px;
   }
+
+  .home-sci a {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+}
+
+/* Landscape orientation for mobile devices */
+@media (max-width: 768px) and (orientation: landscape) {
+  .home {
+    height: 100vh;
+    flex-direction: row;
+    align-items: center;
+    padding: 60px 5% 20px 5%;
+  }
+  
+  .home-content {
+    order: 1;
+    flex: 1;
+    margin-bottom: 0;
+  }
+  
+  .home-content h1 {
+    font-size: 36px;
+  }
+  
+  .home-sci {
+    order: 2;
+    position: relative;
+    bottom: auto;
+    width: 200px;
+    margin: 0 20px;
+  }
+  
 }
